@@ -30,7 +30,7 @@
             background: #C4B081;
         }
 
-        /* Modal Overlay */
+        /* Modal Overlay - (Kept for potential future use if needed, but not used by default in this version) */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -51,11 +51,11 @@
             display: none;
         }
 
-        /* Styling for app logos to ensure they fit well */
+        /* Styling for app logos (kept in case you add custom images later, not used for direct app buttons now) */
         .app-logo {
-            width: 40px; /* Adjust as needed */
-            height: 40px; /* Adjust as needed */
-            object-fit: contain; /* Ensures logo is fully visible within its bounds */
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
             margin-bottom: 4px;
             background-color: rgba(0, 0, 0, 0.1); /* Subtle dark tint for contrast */
             border-radius: 4px; /* Slight rounding */
@@ -73,14 +73,13 @@
             <div class="flex flex-col items-center mb-6">
                 <!-- Villa Blanca Logo -->
                 <img src="https://firebasestorage.googleapis.com/v0/b/handwritten-apps.appspot.com/o/1.png?alt=media&token=ecc2a265-e0c2-40b2-b659-d0437cde3f2f" alt="Villa Blanca Logo" class="w-28 h-28 rounded-full mb-4 shadow-md border-2 border-stone-300 object-contain p-2 bg-white">
-                <h1 class="text-3xl font-bold text-center mb-2">VILLA BLANCA</h1>
-                <p class="text-lg text-stone-700 text-center">PRIVATE RESIDENCE</p>
+                <!-- Removed the H1 "WELCOME" heading -->
             </div>
 
             <div class="text-center mb-6 flex-grow flex flex-col justify-center">
                 <!-- Welcome Message with Guest Name / Room Number -->
-                <h2 class="text-2xl font-semibold mb-3" id="welcome-message">Welcome, Esteemed Guest!</h2>
-                <p class="text-stone-800 text-md">We hope you enjoy your stay with us.</p>
+                <h2 class="text-2xl font-semibold mb-3" id="welcome-message">Welcome Guest!</h2>
+                <p class="text-stone-800 text-md">We are happy to have you and hope you enjoy your stay.</p>
                 <p id="room-info" class="text-stone-800 text-sm mt-1"></p>
             </div>
 
@@ -112,9 +111,10 @@
             <div class="w-full h-96 lg:h-auto lg:flex-grow bg-stone-100 rounded-xl shadow-lg overflow-hidden flex items-center justify-center p-2">
                 <div class="relative w-full h-full pb-[56.25%] overflow-hidden rounded-lg">
                     <!-- 16:9 Aspect Ratio Container -->
+                    <!-- Mute added for reliable autoplay. User can unmute manually. -->
                     <iframe
                         class="absolute top-0 left-0 w-full h-full rounded-lg"
-                        src="https://www.youtube.com/embed/WrM8Rk7LQgs?autoplay=1&controls=0&loop=1&playlist=WrM8Rk7LQgs&start=15"
+                        src="https://www.youtube.com/embed/WrM8Rk7LQgs?autoplay=1&mute=1&controls=0&loop=1&playlist=WrM8Rk7LQgs&start=15"
                         title="YouTube video player"
                         frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -125,46 +125,18 @@
         </div>
     </div>
 
-    <!-- Bottom Footer (App Shortcuts) -->
-    <div class="w-full bg-gradient-to-r from-stone-200 to-stone-400 p-4 md:p-6 mt-4 lg:mt-6 rounded-xl shadow-lg flex justify-around items-center flex-wrap gap-4">
-        <!-- App Icons -->
-        <button class="app-button flex flex-col items-center text-stone-800 p-3 rounded-xl bg-stone-50 hover:bg-stone-100 transition-all duration-300 transform hover:scale-105 shadow-md" data-app="Netflix">
-            <img src="images/app_logos/netflix_logo.png" alt="Netflix Logo" class="app-logo">
-            <span class="text-sm">Netflix</span>
-        </button>
-        <button class="app-button flex flex-col items-center text-stone-800 p-3 rounded-xl bg-stone-50 hover:bg-stone-100 transition-all duration-300 transform hover:scale-105 shadow-md" data-app="Hulu">
-            <img src="images/app_logos/hulu_logo.png" alt="Hulu Logo" class="app-logo">
-            <span class="text-sm">Hulu</span>
-        </button>
-        <button class="app-button flex flex-col items-center text-stone-800 p-3 rounded-xl bg-stone-50 hover:bg-stone-100 transition-all duration-300 transform hover:scale-105 shadow-md" data-app="Prime Video">
-            <img src="images/app_logos/prime_video_logo.png" alt="Prime Video Logo" class="app-logo">
-            <span class="text-sm">Prime Video</span>
-        </button>
-        <button class="app-button flex flex-col items-center text-stone-800 p-3 rounded-xl bg-stone-50 hover:bg-stone-100 transition-all duration-300 transform hover:scale-105 shadow-md" data-app="YouTube">
-            <img src="images/app_logos/youtube_logo.png" alt="YouTube Logo" class="app-logo">
-            <span class="text-sm">YouTube</span>
-        </button>
-        <button class="app-button flex flex-col items-center text-stone-800 p-3 rounded-xl bg-stone-50 hover:bg-stone-100 transition-all duration-300 transform hover:scale-105 shadow-md" data-app="YouTube TV">
-            <img src="images/app_logos/youtube_tv_logo.png" alt="YouTube TV Logo" class="app-logo">
-            <span class="text-sm">YouTube TV</span>
-        </button>
-        <button class="app-button flex flex-col items-center text-stone-800 p-3 rounded-xl bg-stone-50 hover:bg-stone-100 transition-all duration-300 transform hover:scale-105 shadow-md" data-app="Disney Plus">
-            <img src="images/app_logos/disney_plus_logo.png" alt="Disney Plus Logo" class="app-logo">
-            <span class="text-sm">Disney Plus</span>
-        </button>
-    </div>
-
-    <!-- App Instructions Modal -->
-    <div id="app-instructions-modal" class="modal-overlay hidden">
-        <div class="bg-stone-800 text-white rounded-xl shadow-2xl p-6 w-11/12 max-w-lg flex flex-col max-h-[400px]">
-            <div class="flex justify-between items-center mb-4 pb-2 border-b border-stone-700">
-                <h3 class="text-2xl font-bold" id="app-instructions-title">App Instructions</h3>
-                <button id="close-app-instructions-btn" class="text-stone-400 hover:text-white text-3xl leading-none">&times;</button>
-            </div>
-            <div id="app-instructions-content" class="flex-grow overflow-y-auto pr-2 mb-4">
-                <!-- Instructions will be loaded here -->
-            </div>
-        </div>
+    <!-- Bottom Footer (App Instructions) -->
+    <div class="w-full bg-gradient-to-r from-stone-200 to-stone-400 p-4 md:p-6 mt-4 lg:mt-6 rounded-xl shadow-lg flex flex-col items-center justify-center text-center">
+        <h3 class="text-xl font-semibold mb-2 text-stone-800">Accessing Your Favorite Streaming Apps</h3>
+        <p class="text-stone-700 max-w-2xl">
+            To enjoy Netflix, Hulu, Prime Video, YouTube, YouTube TV, Disney+, and more, simply:
+        </p>
+        <ol class="list-decimal list-inside text-left text-stone-700 mt-2">
+            <li>Press the <strong class="font-bold">HOME</strong> or <strong class="font-bold">SMART TV</strong> button on your TV remote.</li>
+            <li>Navigate to the desired app (e.g., Netflix, Hulu) and select it.</li>
+            <li>Sign in with your personal account to begin watching!</li>
+        </ol>
+        <p class="text-stone-700 mt-3">Enjoy your stay at Villa Blanca!</p>
     </div>
 
     <script>
@@ -203,7 +175,11 @@
             const roomNumber = getUrlParameter('room');
 
             if (guestName) {
+                // If a guest name is provided via URL, use it
                 document.getElementById('welcome-message').textContent = `Welcome, ${guestName}!`;
+            } else {
+                // Otherwise, default to "Hello Guest!"
+                document.getElementById('welcome-message').textContent = `Welcome Guest!`; // Changed from "Hello Guest!"
             }
             if (roomNumber) {
                 document.getElementById('room-info').textContent = `Room: ${roomNumber}`;
@@ -248,108 +224,6 @@
                 console.error("Error fetching weather (network/parse):", error);
             }
         }
-
-        // App Instructions Modal Logic
-        const appButtons = document.querySelectorAll('.app-button');
-        const appInstructionsModal = document.getElementById('app-instructions-modal');
-        const closeAppInstructionsBtn = document.getElementById('close-app-instructions-btn');
-        const appInstructionsTitle = document.getElementById('app-instructions-title');
-        const appInstructionsContent = document.getElementById('app-instructions-content');
-
-        const appInstructions = {
-            "Netflix": `
-                <p class="mb-2">To open Netflix:</p>
-                <ol class="list-decimal pl-5 space-y-1">
-                    <li>Press the <strong class="font-semibold">Home</strong> or <strong class="font-semibold">Smart TV</strong> button on your TV remote.</li>
-                    <li>Navigate to the <strong class="font-semibold">Netflix app</strong> and select it.</li>
-                    <li>Log in with your existing Netflix account.</li>
-                </ol>
-                <p class="mt-4 text-sm text-gray-400">If you experience issues, please contact our support at [Your Contact Info].</p>
-                <div class="mt-4 flex justify-center">
-                    <img src="https://placehold.co/150x150/e50914/ffffff?text=Netflix+QR" alt="Netflix Help QR" class="w-32 h-32 rounded-lg shadow">
-                </div>
-                <p class="mt-2 text-center text-sm text-gray-400">Scan for more info</p>
-            `,
-            "Hulu": `
-                <p class="mb-2">To open Hulu:</p>
-                <ol class="list-decimal pl-5 space-y-1">
-                    <li>Press the <strong class="font-semibold">Home</strong> or <strong class="font-semibold">Smart TV</strong> button on your TV remote.</li>
-                    <li>Find and select the <strong class="font-semibold">Hulu app</strong>.</li>
-                    <li>Sign in to your Hulu account to begin streaming.</li>
-                </ol>
-                <p class="mt-4 text-sm text-gray-400">If you experience issues, please contact our support at [Your Contact Info].</p>
-                <div class="mt-4 flex justify-center">
-                    <img src="https://placehold.co/150x150/1ce783/000000?text=Hulu+QR" alt="Hulu Help QR" class="w-32 h-32 rounded-lg shadow">
-                </div>
-                <p class="mt-2 text-center text-sm text-gray-400">Scan for more info</p>
-            `,
-            "Prime Video": `
-                <p class="mb-2">To open Prime Video:</p>
-                <ol class="list-decimal pl-5 space-y-1">
-                    <li>Press the <strong class="font-semibold">Home</strong> or <strong class="font-semibold">Smart TV</strong> button on your TV remote.</li>
-                    <li>Locate and launch the <strong class="font-semibold">Prime Video app</strong>.</li>
-                    <li>Use your Amazon account to sign in and watch.</li>
-                </ol>
-                <p class="mt-4 text-sm text-gray-400">If you experience issues, please contact our support at [Your Contact Info].</p>
-                 <div class="mt-4 flex justify-center">
-                    <img src="https://placehold.co/150x150/00A8E1/ffffff?text=Prime+Video+QR" alt="Prime Video Help QR" class="w-32 h-32 rounded-lg shadow">
-                </div>
-                <p class="mt-2 text-center text-sm text-gray-400">Scan for more info</p>
-            `,
-            "YouTube": `
-                <p class="mb-2">To open YouTube:</p>
-                <ol class="list-decimal pl-5 space-y-1">
-                    <li>Press the <strong class="font-semibold">Home</strong> or <strong class="font-semibold">Smart TV</strong> button on your TV remote.</li>
-                    <li>Select the <strong class="font-semibold">YouTube app</strong> from your TV's apps.</li>
-                    <li>You can browse and watch videos, or sign in for personalized content.</li>
-                </ol>
-                <p class="mt-4 text-sm text-gray-400">If you experience issues, please contact our support at [Your Contact Info].</p>
-                 <div class="mt-4 flex justify-center">
-                    <img src="https://placehold.co/150x150/FF0000/ffffff?text=YouTube+QR" alt="YouTube Help QR" class="w-32 h-32 rounded-lg shadow">
-                </div>
-                <p class="mt-2 text-center text-sm text-gray-400">Scan for more info</p>
-            `,
-            "YouTube TV": `
-                <p class="mb-2">To open YouTube TV:</p>
-                <ol class="list-decimal pl-5 space-y-1">
-                    <li>Press the <strong class="font-semibold">Home</strong> or <strong class="font-semibold">Smart TV</strong> button on your TV remote.</li>
-                    <li>Find and select the <strong class="font-semibold">YouTube TV app</strong>.</li>
-                    <li>Sign in with your YouTube TV account to watch live TV.</li>
-                </ol>
-                <p class="mt-4 text-sm text-gray-400">If you experience issues, please contact our support at [Your Contact Info].</p>
-                <div class="mt-4 flex justify-center">
-                    <img src="https://placehold.co/150x150/CC0000/ffffff?text=YT+TV+QR" alt="YouTube TV Help QR" class="w-32 h-32 rounded-lg shadow">
-                </div>
-                <p class="mt-2 text-center text-sm text-gray-400">Scan for more info</p>
-            `,
-            "Disney Plus": `
-                <p class="mb-2">To open Disney+:</p>
-                <ol class="list-decimal pl-5 space-y-1">
-                    <li>Press the <strong class="font-semibold">Home</strong> or <strong class="font-semibold">Smart TV</strong> button on your TV remote.</li>
-                    <li>Locate and launch the <strong class="font-semibold">Disney+ app</strong>.</li>
-                    <li>Log in with your Disney+ account to start watching.</li>
-                </ol>
-                <p class="mt-4 text-sm text-gray-400">If you experience issues, please contact our support at [Your Contact Info].</p>
-                <div class="mt-4 flex justify-center">
-                    <img src="https://placehold.co/150x150/113366/ffffff?text=Disney%2B+QR" alt="Disney Plus Help QR" class="w-32 h-32 rounded-lg shadow">
-                </div>
-                <p class="mt-2 text-center text-sm text-gray-400">Scan for more info</p>
-            `
-        };
-
-        appButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const appName = button.dataset.app;
-                appInstructionsTitle.textContent = `${appName} Instructions`;
-                appInstructionsContent.innerHTML = appInstructions[appName] || '<p>Instructions not available for this app.</p>';
-                appInstructionsModal.classList.remove('hidden');
-            });
-        });
-
-        closeAppInstructionsBtn.addEventListener('click', () => {
-            appInstructionsModal.classList.add('hidden');
-        });
-
     </script>
 </body>
 </html>
