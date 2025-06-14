@@ -6,14 +6,22 @@
     <title>Villa Blanca Welcome Menu</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Updated Google Fonts: Playfair Display for headings, Inter for general text -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', sans-serif; /* Default body text */
             background-color: #F8F5F0; /* Light, warm background matching logo */
             color: #333333; /* Darker text for readability on light background */
             overflow: hidden; /* Prevent scrolling on body when modal is open */
         }
+        /* Apply Playfair Display to specific headings for an upscale look */
+        #welcome-message,
+        .font-playfair,
+        .digital-time { /* Apply to digital time as well */
+            font-family: 'Playfair Display', serif;
+        }
+
         /* Custom scrollbar for aesthetic, if content overflows */
         ::-webkit-scrollbar {
             width: 8px;
@@ -71,41 +79,53 @@
         <!-- Left Sidebar (Logo, Welcome, Weather, Clock, Wi-Fi Info) -->
         <div class="lg:w-1/4 w-full bg-gradient-to-br from-[#E0DED7] to-[#A08B5C] text-[#333333] p-6 rounded-xl shadow-lg flex flex-col justify-between overflow-hidden">
             <div class="flex flex-col items-center mb-6">
-                <!-- Villa Blanca Logo - Now using relative path from your repo -->
-                <img src="images/villa_blanca_logo.png" alt="Villa Blanca Logo" class="w-28 h-28 rounded-full mb-4 shadow-md border-2 border-stone-300 object-contain p-2 bg-white">
+                <!-- Villa Blanca Logo - Size increased -->
+                <img src="images/villa_blanca_logo.png" alt="Villa Blanca Logo" class="w-48 h-48 rounded-full mb-4 shadow-md border-2 border-stone-300 object-contain p-2 bg-white">
             </div>
 
             <div class="text-center mb-6 flex-grow flex flex-col justify-center">
-                <!-- Welcome Message with Guest Name / Room Number -->
-                <h2 class="text-2xl font-semibold mb-3" id="welcome-message">Welcome Guest!</h2>
-                <p class="text-stone-800 text-md">We are happy to have you and hope you enjoy your stay.</p>
+                <!-- Welcome Message with Guest Name / Room Number - Increased font size, removed exclamation -->
+                <h2 class="text-4xl font-semibold mb-3 font-playfair" id="welcome-message">Welcome Guest</h2>
+                <p class="text-stone-800 text-md font-playfair">Welcome to Villa Blanca. We are delighted to have you and trust your stay will be exceptional.</p>
                 <p id="room-info" class="text-stone-800 text-sm mt-1"></p>
             </div>
 
             <div class="flex flex-col items-center mb-6 bg-white bg-opacity-70 p-4 rounded-lg shadow-inner text-stone-800">
                 <!-- Live Weather -->
-                <div class="text-xl font-medium mb-2">Live Weather</div>
+                <div class="text-xl font-medium mb-2 font-playfair">Live Weather</div>
                 <div class="flex items-center space-x-2">
                     <img id="weather-icon" src="https://openweathermap.org/img/wn/04n@2x.png" alt="Weather Icon" class="w-12 h-12">
-                    <span id="temperature" class="text-4xl font-bold">--°F</span>
+                    <span id="temperature" class="text-4xl font-bold font-playfair">--°F</span>
                 </div>
-                <p id="weather-description" class="text-stone-700">Loading...</p>
-                <p id="weather-location" class="text-stone-700 text-sm">--</p>
+                <p id="weather-description" class="text-stone-700 font-playfair">Loading...</p>
+                <p id="weather-location" class="text-stone-700 text-sm font-playfair">--</p>
             </div>
 
-            <div class="text-center mb-6 bg-white bg-opacity-70 p-4 rounded-lg shadow-inner text-stone-800">
-                <!-- Live Clock -->
-                <div id="live-clock" class="text-4xl font-bold"></div>
+            <div class="text-center mb-6 bg-white bg-opacity-70 p-4 rounded-lg shadow-inner text-stone-800 flex flex-col gap-3">
+                <!-- Current Time - World Clock Section -->
+                <div class="text-xl font-medium font-playfair">Current Times</div>
+                <div class="flex flex-col items-center">
+                    <span class="digital-time text-3xl font-bold" id="tavares-time">--:--:-- --</span>
+                    <span class="text-sm font-playfair text-stone-700">Tavares, FL (Local)</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="digital-time text-3xl font-bold" id="london-time">--:--:-- --</span>
+                    <span class="text-sm font-playfair text-stone-700">London, UK</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="digital-time text-3xl font-bold" id="tokyo-time">--:--:-- --</span>
+                    <span class="text-sm font-playfair text-stone-700">Tokyo, Japan</span>
+                </div>
             </div>
 
             <div class="flex justify-center mt-auto flex-col items-center gap-4 bg-white bg-opacity-70 p-4 rounded-lg shadow-inner text-stone-800">
                 <!-- Wi-Fi Login Info -->
-                <div class="text-xl font-medium mb-2 flex items-center gap-2">
+                <div class="text-xl font-medium mb-2 flex items-center gap-2 font-playfair">
                     <img src="images/wifi_logo.png" alt="Wi-Fi Logo" class="w-8 h-8 object-contain">
                     Wi-Fi Access
                 </div>
-                <p class="text-stone-700 text-md"><strong>SSID:</strong> VillaBlanca Guest</p>
-                <p class="text-stone-700 text-md"><strong>Password:</strong> WelcometoVB</p>
+                <p class="text-stone-700 text-md font-playfair"><strong>SSID:</strong> VillaBlanca Guest</p>
+                <p class="text-stone-700 text-md font-playfair"><strong>Password:</strong> WelcometoVB</p>
             </div>
         </div>
 
@@ -115,7 +135,7 @@
             <div class="w-full h-96 lg:h-auto lg:flex-grow bg-stone-100 rounded-xl shadow-lg overflow-hidden flex items-center justify-center p-2">
                 <div class="relative w-full h-full pb-[56.25%] overflow-hidden rounded-lg">
                     <!-- 16:9 Aspect Ratio Container -->
-                    <!-- Mute added for reliable autoplay. User can unmute manually. -->
+                    <!-- Mute re-added for reliable autoplay -->
                     <iframe
                         class="absolute top-0 left-0 w-full h-full rounded-lg"
                         src="https://www.youtube.com/embed/WrM8Rk7LQgs?autoplay=1&mute=1&controls=0&loop=1&playlist=WrM8Rk7LQgs&start=15"
@@ -131,16 +151,16 @@
 
     <!-- Bottom Footer (App Instructions) -->
     <div class="w-full bg-gradient-to-r from-stone-200 to-stone-400 p-4 md:p-6 mt-4 lg:mt-6 rounded-xl shadow-lg flex flex-col items-center justify-center text-center">
-        <h3 class="text-xl font-semibold mb-2 text-stone-800">Accessing Your Favorite Streaming Apps</h3>
-        <p class="text-stone-700 max-w-2xl">
+        <h3 class="text-xl font-semibold mb-2 text-stone-800 font-playfair">Accessing Your Favorite Streaming Apps</h3>
+        <p class="text-stone-700 max-w-2xl font-playfair">
             To enjoy Netflix, Hulu, Prime Video, YouTube, YouTube TV, Disney+, and more, simply:
         </p>
-        <ol class="list-decimal list-inside text-left text-stone-700 mt-2">
+        <ol class="list-decimal list-inside text-left text-stone-700 mt-2 font-playfair">
             <li>Press the <strong class="font-bold">HOME</strong> or <strong class="font-bold">SMART TV</strong> button on your TV remote.</li>
             <li>Navigate to the desired app (e.g., Netflix, Hulu) and select it.</li>
             <li>Sign in with your personal account to begin watching!</li>
         </ol>
-        <p class="text-stone-700 mt-3">Enjoy your stay at Villa Blanca!</p>
+        <p class="text-stone-700 mt-3 font-playfair">Enjoy your stay at Villa Blanca.</p>
     </div>
 
     <script>
@@ -148,53 +168,7 @@
         const OPENWEATHER_API_KEY = 'b8c65d3e969fa63ecf76eb4ff6069169'; // YOUR ACTUAL KEY
         const WEATHER_CITY = 'Tavares'; // Set to Tavares, FL
 
-        // JavaScript for Live Clock
-        function updateClock() {
-            const now = new Date();
-            let hours = now.getHours();
-            const minutes = now.getMinutes().toString().padStart(2, '0');
-            const seconds = now.getSeconds().toString().padStart(2, '0');
-            const ampm = hours >= 12 ? 'PM' : 'AM';
-            hours = hours % 12;
-            hours = hours ? hours : 12; // the hour '0' should be '12'
-            const timeString = `${hours}:${minutes}:${seconds} ${ampm}`;
-            document.getElementById('live-clock').textContent = timeString;
-        }
-
-        // Update clock every second
-        setInterval(updateClock, 1000);
-        updateClock(); // Initial call to display clock immediately
-
-        // Function to parse URL parameters for personalization
-        function getUrlParameter(name) {
-            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-            var results = regex.exec(location.search);
-            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-        }
-
-        // Apply personalization from URL parameters
-        window.onload = function() {
-            const guestName = getUrlParameter('name');
-            const roomNumber = getUrlParameter('room');
-
-            if (guestName) {
-                // If a guest name is provided via URL, use it
-                document.getElementById('welcome-message').textContent = `Welcome, ${guestName}!`;
-            } else {
-                // Otherwise, default to "Welcome Guest!"
-                document.getElementById('welcome-message').textContent = `Welcome Guest!`;
-            }
-            if (roomNumber) {
-                document.getElementById('room-info').textContent = `Room: ${roomNumber}`;
-            }
-
-            // Fetch weather on load
-            fetchWeather();
-        };
-
-
-        // Function to fetch Live Weather
+        // JavaScript for Live Weather
         async function fetchWeather() {
             if (!OPENWEATHER_API_KEY || OPENWEATHER_API_KEY === 'YOUR_OPENWEATHER_API_KEY') {
                 console.warn("OpenWeatherMap API key is not set. Weather data will not be fetched.");
@@ -228,6 +202,60 @@
                 console.error("Error fetching weather (network/parse):", error);
             }
         }
+
+        // JavaScript for World Digital Clock
+        function updateWorldDigitalClocks() {
+            const options = {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            };
+
+            // Tavares (Local time, assuming it's the device's local time)
+            const tavaresTime = new Date().toLocaleTimeString('en-US', options);
+            document.getElementById('tavares-time').textContent = tavaresTime;
+
+            // London Time
+            const londonTime = new Date().toLocaleTimeString('en-US', { ...options, timeZone: 'Europe/London' });
+            document.getElementById('london-time').textContent = londonTime;
+
+            // Tokyo Time
+            const tokyoTime = new Date().toLocaleTimeString('en-US', { ...options, timeZone: 'Asia/Tokyo' });
+            document.getElementById('tokyo-time').textContent = tokyoTime;
+        }
+
+        // Clock initialization and update interval
+        setInterval(updateWorldDigitalClocks, 1000); // Update every second
+        updateWorldDigitalClocks(); // Initial call to set clocks immediately
+
+        // Function to parse URL parameters for personalization
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Apply personalization from URL parameters
+        window.onload = function() {
+            const guestName = getUrlParameter('name');
+            const roomNumber = getUrlParameter('room');
+
+            if (guestName) {
+                // If a guest name is provided via URL, use it
+                document.getElementById('welcome-message').textContent = `Welcome, ${guestName}`;
+            } else {
+                // Otherwise, default to "Welcome Guest"
+                document.getElementById('welcome-message').textContent = `Welcome Guest`;
+            }
+            if (roomNumber) {
+                document.getElementById('room-info').textContent = `Room: ${roomNumber}`;
+            }
+
+            // Fetch weather on load
+            fetchWeather();
+        };
     </script>
 </body>
 </html>
