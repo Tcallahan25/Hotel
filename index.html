@@ -68,12 +68,11 @@
     <!-- Main Content Area -->
     <div class="flex flex-grow flex-col lg:flex-row gap-4 lg:gap-6">
 
-        <!-- Left Sidebar (Logo, Welcome, Weather, Clock, QR Code) -->
+        <!-- Left Sidebar (Logo, Welcome, Weather, Clock, Wi-Fi Info) -->
         <div class="lg:w-1/4 w-full bg-gradient-to-br from-[#E0DED7] to-[#A08B5C] text-[#333333] p-6 rounded-xl shadow-lg flex flex-col justify-between overflow-hidden">
             <div class="flex flex-col items-center mb-6">
-                <!-- Villa Blanca Logo -->
-                <img src="https://firebasestorage.googleapis.com/v0/b/handwritten-apps.appspot.com/o/1.png?alt=media&token=ecc2a265-e0c2-40b2-b659-d0437cde3f2f" alt="Villa Blanca Logo" class="w-28 h-28 rounded-full mb-4 shadow-md border-2 border-stone-300 object-contain p-2 bg-white">
-                <!-- Removed the H1 "WELCOME" heading -->
+                <!-- Villa Blanca Logo - Now using relative path from your repo -->
+                <img src="images/villa_blanca_logo.png" alt="Villa Blanca Logo" class="w-28 h-28 rounded-full mb-4 shadow-md border-2 border-stone-300 object-contain p-2 bg-white">
             </div>
 
             <div class="text-center mb-6 flex-grow flex flex-col justify-center">
@@ -99,9 +98,14 @@
                 <div id="live-clock" class="text-4xl font-bold"></div>
             </div>
 
-            <div class="flex justify-center mt-auto flex-col items-center gap-4">
-                <!-- QR Code (Placeholder) -->
-                <img src="https://placehold.co/150x150/A08B5C/ffffff?text=SCAN+FOR+INFO" alt="QR Code" class="w-36 h-36 rounded-lg shadow-lg border-2 border-stone-300">
+            <div class="flex justify-center mt-auto flex-col items-center gap-4 bg-white bg-opacity-70 p-4 rounded-lg shadow-inner text-stone-800">
+                <!-- Wi-Fi Login Info -->
+                <div class="text-xl font-medium mb-2 flex items-center gap-2">
+                    <img src="images/wifi_logo.png" alt="Wi-Fi Logo" class="w-8 h-8 object-contain">
+                    Wi-Fi Access
+                </div>
+                <p class="text-stone-700 text-md"><strong>SSID:</strong> VillaBlanca Guest</p>
+                <p class="text-stone-700 text-md"><strong>Password:</strong> WelcometoVB</p>
             </div>
         </div>
 
@@ -178,8 +182,8 @@
                 // If a guest name is provided via URL, use it
                 document.getElementById('welcome-message').textContent = `Welcome, ${guestName}!`;
             } else {
-                // Otherwise, default to "Hello Guest!"
-                document.getElementById('welcome-message').textContent = `Welcome Guest!`; // Changed from "Hello Guest!"
+                // Otherwise, default to "Welcome Guest!"
+                document.getElementById('welcome-message').textContent = `Welcome Guest!`;
             }
             if (roomNumber) {
                 document.getElementById('room-info').textContent = `Room: ${roomNumber}`;
