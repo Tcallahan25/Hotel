@@ -23,98 +23,83 @@
             vertical-align: super;
             font-weight: 400; 
         }
-        #tavares-time {
-            font-size: 2.25rem;
-            line-height: 1; 
-        }
-        #tavares-time + .text-sm { 
-            margin-bottom: 0.5rem;
-        }
-        /* Custom scrollbar for aesthetics */
+        /* Custom scrollbar - We hide this now, but good to keep just in case */
         ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #E0DED7;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #A08B5C; 
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #C4B081;
+            width: 0px;
+            background: transparent; /* make scrollbar transparent */
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col p-2 sm:p-4 lg:p-6">
+<!-- Grid layout remains the best approach for this -->
+<body class="h-screen grid grid-rows-[1fr_auto] gap-4 p-4 overflow-hidden">
 
-    <!-- Main Content Area -->
-    <div class="flex flex-grow flex-col lg:flex-row gap-3 lg:gap-5">
+    <!-- Main Content Area (First Grid Row) -->
+    <div class="flex flex-col lg:flex-row gap-4 lg:gap-5 min-h-0">
 
-        <!-- Left Sidebar (Logo, Welcome, Weather, Clock, Wi-Fi Info) -->
-        <div class="lg:w-1/4 w-full bg-gradient-to-br from-[#E0DED7] to-[#A08B5C] text-[#333333] p-4 sm:p-5 rounded-xl shadow-lg flex flex-col justify-between overflow-hidden">
-            <div class="flex flex-col items-center mb-4 sm:mb-5">
-                <!-- Villa Blanca Logo - UPDATED with larger size -->
+        <!-- Left Sidebar -->
+        <div class="lg:w-1/4 w-full bg-gradient-to-br from-[#E0DED7] to-[#A08B5C] text-[#333333] p-4 rounded-xl shadow-lg flex flex-col">
+            
+            <!-- Logo Section -->
+            <div class="flex-shrink-0 flex flex-col items-center">
                 <img src="images/villa_blanca_logo.png"
-                     alt="Villa Blanca Logo" class="w-48 h-48 sm:w-64 sm:h-64 rounded-full mb-3 shadow-md border-2 border-stone-300 object-contain p-2 bg-white"
+                     alt="Villa Blanca Logo" class="w-40 h-40 sm:w-48 sm:h-48 rounded-full mb-2 shadow-md border-2 border-stone-300 object-contain p-2 bg-white"
                      onerror="this.onerror=null; this.src='https://placehold.co/256x256/F8F5F0/333333?text=VB';">
             </div>
 
-            <div class="text-center mb-4 sm:mb-5 flex-grow flex flex-col justify-center">
-                <!-- Welcome Message with Guest Name / Room Number -->
-                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-1" id="welcome-message">Welcome Guest</h2>
-                <!-- NEW: Current Date Display -->
-                <p class="text-base sm:text-lg text-stone-800 mb-2" id="current-date">...</p>
-                <p class="text-sm sm:text-base text-stone-800">Welcome to Villa Blanca. We are delighted to have you and trust your stay will be exceptional.</p>
-                <p id="room-info" class="text-xs sm:text-sm text-stone-800 mt-1"></p>
+            <!-- Welcome Section (Grows to fill space) -->
+            <div class="text-center my-auto flex-grow flex flex-col justify-center">
+                <h2 class="text-2xl sm:text-3xl font-semibold" id="welcome-message">Welcome Guest</h2>
+                <p class="text-sm text-stone-800" id="current-date">...</p>
+                <p class="text-xs text-stone-800 mt-1">Welcome to Villa Blanca. We are delighted to have you.</p>
+                <p id="room-info" class="text-xs text-stone-800"></p>
             </div>
 
-            <div class="flex flex-col items-center mb-4 sm:mb-5 bg-white bg-opacity-70 p-3 sm:p-4 rounded-lg shadow-inner text-stone-800">
+            <!-- Widgets container for better spacing -->
+            <div class="flex-shrink-0 flex flex-col gap-2">
                 <!-- Live Weather -->
-                <div class="text-base sm:text-lg font-medium mb-1">Live Weather</div>
-                <div class="flex items-center space-x-1 sm:space-x-2">
-                    <img id="weather-icon" src="https://openweathermap.org/img/wn/04n@2x.png" alt="Weather Icon" class="w-10 h-10 sm:w-12 sm:h-12">
-                    <span id="temperature" class="text-3xl sm:text-4xl font-bold">--°F</span>
+                <!-- FIXED: Re-added weather-description element and rearranged for clarity -->
+                <div class="flex items-center justify-center bg-white bg-opacity-70 p-2 rounded-lg shadow-inner text-stone-800 gap-4">
+                    <div class="flex items-center space-x-2">
+                        <img id="weather-icon" src="https://openweathermap.org/img/wn/04n@2x.png" alt="Weather Icon" class="w-10 h-10">
+                        <span id="temperature" class="text-3xl font-bold">--°F</span>
+                    </div>
+                    <div class="text-center">
+                        <p id="weather-description" class="text-base font-medium capitalize">Loading...</p>
+                        <p id="weather-location" class="text-xs text-stone-700 -mt-1">--</p>
+                    </div>
                 </div>
-                <p id="weather-description" class="text-sm text-stone-700">Loading...</p>
-                <p id="weather-location" class="text-xs text-stone-700">--</p>
-            </div>
 
-            <div class="text-center mb-4 sm:mb-5 bg-white bg-opacity-70 p-3 sm:p-4 rounded-lg shadow-inner text-stone-800 flex flex-col gap-2">
-                <!-- Current Time - World Clock Section -->
-                <div class="text-base sm:text-lg font-medium">Current Times</div>
-                <div class="flex flex-col items-center">
-                    <span class="digital-time text-4xl sm:text-5xl" id="tavares-time">--:--:-- <span class="ampm">--</span></span>
-                    <span class="text-sm text-stone-700 mt-1">Tavares, FL (Local)</span>
+                <!-- World Clock Section -->
+                <div class="text-center bg-white bg-opacity-70 p-2 rounded-lg shadow-inner text-stone-800 flex items-center justify-around">
+                    <div class="flex flex-col items-center">
+                        <span class="digital-time text-2xl" id="tavares-time">--:--<span class="ampm">--</span></span>
+                        <span class="text-xs text-stone-700">Local</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <span class="digital-time text-2xl" id="london-time">--:--<span class="ampm">--</span></span>
+                        <span class="text-xs text-stone-700">London</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <span class="digital-time text-2xl" id="tokyo-time">--:--<span class="ampm">--</span></span>
+                        <span class="text-xs text-stone-700">Tokyo</span>
+                    </div>
                 </div>
-                <div class="flex flex-col items-center mt-2">
-                    <span class="digital-time text-2xl sm:text-3xl" id="london-time">--:--:-- <span class="ampm">--</span></span>
-                    <span class="text-xs sm:text-sm text-stone-700">London, UK</span>
-                </div>
-                <div class="flex flex-col items-center mt-2">
-                    <span class="digital-time text-2xl sm:text-3xl" id="tokyo-time">--:--:-- <span class="ampm">--</span></span>
-                    <span class="text-xs sm:text-sm text-stone-700">Tokyo, Japan</span>
-                </div>
-            </div>
 
-            <div class="flex justify-center mt-auto flex-col items-center gap-2 bg-white bg-opacity-70 p-3 sm:p-4 rounded-lg shadow-inner text-stone-800">
                 <!-- Wi-Fi Login Info -->
-                <div class="text-base sm:text-lg font-medium mb-1 flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7"><path d="M5 12.55a8 8 0 0 1 14 0"></path><path d="M2 8.82a15 15 0 0 1 20 0"></path><path d="M8.5 16.25a4 4 0 0 1 7 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
-                    Wi-Fi Access
+                <div class="flex flex-col items-center gap-1 bg-white bg-opacity-70 p-2 rounded-lg shadow-inner text-stone-800">
+                    <div class="text-base font-medium flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M5 12.55a8 8 0 0 1 14 0"></path><path d="M2 8.82a15 15 0 0 1 20 0"></path><path d="M8.5 16.25a4 4 0 0 1 7 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+                        Wi-Fi Access
+                    </div>
+                    <p class="text-sm text-stone-700"><strong>SSID:</strong> VillaBlanca Guest / <strong>Pass:</strong> WelcometoVB</p>
                 </div>
-                <p class="text-sm text-stone-700"><strong>SSID:</strong> VillaBlanca Guest</p>
-                <p class="text-sm text-stone-700"><strong>Password:</strong> WelcometoVB</p>
             </div>
         </div>
 
         <!-- Right Content Area (YouTube Video) -->
-        <div class="lg:w-3/4 w-full flex flex-col gap-3 lg:gap-5">
-            <!-- YouTube Video Box -->
-            <div class="w-full h-auto min-h-[250px] lg:flex-grow bg-stone-100 rounded-xl shadow-lg overflow-hidden flex items-center justify-center p-2">
-                <div class="relative w-full h-full pb-[56.25%] overflow-hidden rounded-lg">
-                    <!-- 16:9 Aspect Ratio Container -->
+        <div class="lg:w-3/4 w-full flex flex-col">
+            <div class="w-full h-full bg-stone-100 rounded-xl shadow-lg overflow-hidden flex items-center justify-center p-2">
+                <div class="relative w-full h-0 pb-[56.25%] overflow-hidden rounded-lg">
                     <iframe
                         class="absolute top-0 left-0 w-full h-full rounded-lg"
                         src="https://www.youtube.com/embed/WrM8Rk7LQgs?autoplay=1&mute=1&controls=0&loop=1&playlist=WrM8Rk7LQgs&start=15"
@@ -128,13 +113,12 @@
         </div>
     </div>
 
-    <!-- Bottom Footer (App Instructions) -->
-    <div class="w-full bg-gradient-to-r from-stone-200 to-stone-400 p-3 sm:p-4 mt-3 lg:mt-5 rounded-xl shadow-lg flex flex-col items-center justify-center text-center">
-        <h3 class="text-lg sm:text-xl font-semibold mb-2">Accessing Your Favorite Streaming Apps</h3>
-        <p class="text-sm text-stone-700 max-w-2xl">
-            To enjoy Netflix, Hulu, Prime Video, and more, simply press the <strong>HOME</strong> or <strong>SMART TV</strong> button on your TV remote and select your desired app.
+    <!-- Bottom Footer (Second Grid Row) -->
+    <div class="w-full bg-gradient-to-r from-stone-200 to-stone-400 p-3 rounded-xl shadow-lg flex flex-col items-center justify-center text-center">
+        <h3 class="text-base font-semibold">Accessing Streaming Apps</h3>
+        <p class="text-xs text-stone-700 max-w-2xl">
+            To enjoy Netflix, Hulu, etc., press the <strong>HOME</strong> button on your remote and select your app.
         </p>
-        <p class="text-xs text-stone-600 mt-2">You will need to sign in with your personal account.</p>
     </div>
 
     <script>
@@ -155,7 +139,7 @@
         async function fetchWeather() {
             if (!OPENWEATHER_API_KEY || OPENWEATHER_API_KEY === 'YOUR_OPENWEATHER_API_KEY') {
                 console.warn("OpenWeatherMap API key not set.");
-                weatherDescriptionEl.textContent = "Weather data unavailable.";
+                if(weatherDescriptionEl) weatherDescriptionEl.textContent = "Weather data unavailable.";
                 return;
             }
             const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${WEATHER_CITY}&appid=${OPENWEATHER_API_KEY}&units=imperial`;
@@ -168,71 +152,52 @@
                 const data = await response.json();
 
                 temperatureEl.textContent = `${Math.round(data.main.temp)}°F`;
-                weatherDescriptionEl.textContent = data.weather[0].description.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+                // FIXED: Simplified capitalization by using a CSS class on the element itself.
+                weatherDescriptionEl.textContent = data.weather[0].description;
                 weatherIconEl.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
                 weatherLocationEl.textContent = `${data.name}, ${data.sys.country}`;
             } catch (error) {
                 console.error("Error fetching weather:", error);
-                weatherDescriptionEl.textContent = "Failed to load weather.";
+                if(weatherDescriptionEl) weatherDescriptionEl.textContent = "Failed to load weather.";
             }
         }
 
         // --- CLOCK & DATE LOGIC ---
         function updateClocksAndDate() {
             const now = new Date();
-
-            // Options for time formatting (e.g., 07:30:45 PM)
-            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
-            
-            // Function to safely format time for different timezones
+            const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: true };
             const formatTime = (timeZone) => {
                 try {
                     return new Intl.DateTimeFormat('en-US', { ...timeOptions, timeZone }).format(now);
                 } catch (e) {
                     console.error(`Invalid time zone: ${timeZone}`);
-                    return "--:--:-- --"; // Fallback
+                    return "--:-- --";
                 }
             };
-
-            // Update time displays
             document.getElementById('tavares-time').innerHTML = formatTime('America/New_York').replace(' ', ' <span class="ampm">') + '</span>';
             document.getElementById('london-time').innerHTML = formatTime('Europe/London').replace(' ', ' <span class="ampm">') + '</span>';
             document.getElementById('tokyo-time').innerHTML = formatTime('Asia/Tokyo').replace(' ', ' <span class="ampm">') + '</span>';
-
-            // Options for date formatting (e.g., Saturday, June 14, 2025)
             const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             currentDateEl.textContent = new Intl.DateTimeFormat('en-US', dateOptions).format(now);
-
-            // Set dynamic greeting based on the hour
             const hour = now.getHours();
             let greeting = "Welcome";
-            if (hour < 12) {
-                greeting = "Good Morning";
-            } else if (hour < 18) {
-                greeting = "Good Afternoon";
-            } else {
-                greeting = "Good Evening";
-            }
-            // Combine greeting with the guest name
+            if (hour < 12) { greeting = "Good Morning"; }
+            else if (hour < 18) { greeting = "Good Afternoon"; }
+            else { greeting = "Good Evening"; }
             const guestName = new URLSearchParams(window.location.search).get('name') || 'Guest';
             welcomeMessageEl.textContent = `${greeting}, ${guestName}`;
         }
-        
+       
         // --- INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
-            // Get Room Number from URL
             const roomNumber = new URLSearchParams(window.location.search).get('room');
             if (roomNumber) {
                 roomInfoEl.textContent = `Room: ${roomNumber}`;
             }
-
-            // Initial fetch and updates
             fetchWeather();
             updateClocksAndDate(); 
-
-            // Set intervals to keep data live
-            setInterval(fetchWeather, 300000); // Fetch weather every 5 minutes
-            setInterval(updateClocksAndDate, 1000); // Update clock, date, and greeting every second
+            setInterval(fetchWeather, 300000);
+            setInterval(updateClocksAndDate, 1000);
         });
     </script>
 </body>
