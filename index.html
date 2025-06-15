@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Villa Blanca Welcome Menu</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Lora for all text -->
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -28,7 +30,7 @@
         #tavares-time + .text-sm { 
             margin-bottom: 0.5rem;
         }
-        /* Custom scrollbar for aesthetics (will only appear if content overflows within a column) */
+        /* Custom scrollbar for aesthetics */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -45,23 +47,31 @@
         }
     </style>
 </head>
-<body class="h-screen flex flex-col p-2 sm:p-4 lg:p-6 overflow-hidden">
+<body class="min-h-screen flex flex-col p-2 sm:p-4 lg:p-6">
 
-    <div class="flex flex-grow flex-col lg:flex-row gap-3 lg:gap-5 min-h-0"> <div class="lg:w-1/4 w-full bg-gradient-to-br from-[#E0DED7] to-[#A08B5C] text-[#333333] p-4 sm:p-5 rounded-xl shadow-lg flex flex-col justify-between overflow-y-auto">
+    <!-- Main Content Area -->
+    <div class="flex flex-grow flex-col lg:flex-row gap-3 lg:gap-5">
+
+        <!-- Left Sidebar (Logo, Welcome, Weather, Clock, Wi-Fi Info) -->
+        <div class="lg:w-1/4 w-full bg-gradient-to-br from-[#E0DED7] to-[#A08B5C] text-[#333333] p-4 sm:p-5 rounded-xl shadow-lg flex flex-col justify-between overflow-hidden">
             <div class="flex flex-col items-center mb-4 sm:mb-5">
+                <!-- Villa Blanca Logo - UPDATED with larger size -->
                 <img src="images/villa_blanca_logo.png"
                      alt="Villa Blanca Logo" class="w-48 h-48 sm:w-64 sm:h-64 rounded-full mb-3 shadow-md border-2 border-stone-300 object-contain p-2 bg-white"
                      onerror="this.onerror=null; this.src='https://placehold.co/256x256/F8F5F0/333333?text=VB';">
             </div>
 
             <div class="text-center mb-4 sm:mb-5 flex-grow flex flex-col justify-center">
+                <!-- Welcome Message with Guest Name / Room Number -->
                 <h2 class="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-1" id="welcome-message">Welcome Guest</h2>
+                <!-- NEW: Current Date Display -->
                 <p class="text-base sm:text-lg text-stone-800 mb-2" id="current-date">...</p>
                 <p class="text-sm sm:text-base text-stone-800">Welcome to Villa Blanca. We are delighted to have you and trust your stay will be exceptional.</p>
                 <p id="room-info" class="text-xs sm:text-sm text-stone-800 mt-1"></p>
             </div>
 
             <div class="flex flex-col items-center mb-4 sm:mb-5 bg-white bg-opacity-70 p-3 sm:p-4 rounded-lg shadow-inner text-stone-800">
+                <!-- Live Weather -->
                 <div class="text-base sm:text-lg font-medium mb-1">Live Weather</div>
                 <div class="flex items-center space-x-1 sm:space-x-2">
                     <img id="weather-icon" src="https://openweathermap.org/img/wn/04n@2x.png" alt="Weather Icon" class="w-10 h-10 sm:w-12 sm:h-12">
@@ -72,6 +82,7 @@
             </div>
 
             <div class="text-center mb-4 sm:mb-5 bg-white bg-opacity-70 p-3 sm:p-4 rounded-lg shadow-inner text-stone-800 flex flex-col gap-2">
+                <!-- Current Time - World Clock Section -->
                 <div class="text-base sm:text-lg font-medium">Current Times</div>
                 <div class="flex flex-col items-center">
                     <span class="digital-time text-4xl sm:text-5xl" id="tavares-time">--:--:-- <span class="ampm">--</span></span>
@@ -88,6 +99,7 @@
             </div>
 
             <div class="flex justify-center mt-auto flex-col items-center gap-2 bg-white bg-opacity-70 p-3 sm:p-4 rounded-lg shadow-inner text-stone-800">
+                <!-- Wi-Fi Login Info -->
                 <div class="text-base sm:text-lg font-medium mb-1 flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7"><path d="M5 12.55a8 8 0 0 1 14 0"></path><path d="M2 8.82a15 15 0 0 1 20 0"></path><path d="M8.5 16.25a4 4 0 0 1 7 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
                     Wi-Fi Access
@@ -97,9 +109,12 @@
             </div>
         </div>
 
+        <!-- Right Content Area (YouTube Video) -->
         <div class="lg:w-3/4 w-full flex flex-col gap-3 lg:gap-5">
+            <!-- YouTube Video Box -->
             <div class="w-full h-auto min-h-[250px] lg:flex-grow bg-stone-100 rounded-xl shadow-lg overflow-hidden flex items-center justify-center p-2">
                 <div class="relative w-full h-full pb-[56.25%] overflow-hidden rounded-lg">
+                    <!-- 16:9 Aspect Ratio Container -->
                     <iframe
                         class="absolute top-0 left-0 w-full h-full rounded-lg"
                         src="https://www.youtube.com/embed/WrM8Rk7LQgs?autoplay=1&mute=1&controls=0&loop=1&playlist=WrM8Rk7LQgs&start=15"
@@ -113,7 +128,8 @@
         </div>
     </div>
 
-    <div class="w-full bg-gradient-to-r from-stone-200 to-stone-400 p-3 sm:p-4 rounded-xl shadow-lg flex flex-col items-center justify-center text-center flex-shrink-0">
+    <!-- Bottom Footer (App Instructions) -->
+    <div class="w-full bg-gradient-to-r from-stone-200 to-stone-400 p-3 sm:p-4 mt-3 lg:mt-5 rounded-xl shadow-lg flex flex-col items-center justify-center text-center">
         <h3 class="text-lg sm:text-xl font-semibold mb-2">Accessing Your Favorite Streaming Apps</h3>
         <p class="text-sm text-stone-700 max-w-2xl">
             To enjoy Netflix, Hulu, Prime Video, and more, simply press the <strong>HOME</strong> or <strong>SMART TV</strong> button on your TV remote and select your desired app.
@@ -122,7 +138,6 @@
     </div>
 
     <script>
-        // --- YOUR JAVASCRIPT REMAINS EXACTLY THE SAME ---
         // --- CONFIGURATION ---
         const OPENWEATHER_API_KEY = 'b8c65d3e969fa63ecf76eb4ff6069169'; // Your actual OpenWeatherMap API key
         const WEATHER_CITY = 'Tavares'; 
@@ -168,7 +183,7 @@
 
             // Options for time formatting (e.g., 07:30:45 PM)
             const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
-           
+            
             // Function to safely format time for different timezones
             const formatTime = (timeZone) => {
                 try {
@@ -202,7 +217,7 @@
             const guestName = new URLSearchParams(window.location.search).get('name') || 'Guest';
             welcomeMessageEl.textContent = `${greeting}, ${guestName}`;
         }
-       
+        
         // --- INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
             // Get Room Number from URL
